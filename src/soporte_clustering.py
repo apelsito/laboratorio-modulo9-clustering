@@ -258,7 +258,7 @@ class Preprocesado:
 
         return self.dataframe
     
-    def one_hot_encoding(self,nombre_encoder = "onehot_encoder.pkl"):
+    def one_hot_encoding(self,nombre_encoder = "onehot_encoder.pkl", drop_index = False):
         """
         Realiza codificación one-hot en las columnas especificadas en el diccionario de codificación.
 
@@ -286,7 +286,10 @@ class Preprocesado:
             oh_df = pd.DataFrame(trans_one_hot.toarray(), columns=one_hot_encoder.get_feature_names_out())
 
             # concatenamos los resultados obtenidos en la transformación con el DataFrame original
-            self.dataframe = pd.concat([self.dataframe.reset_index(drop=True), oh_df.reset_index(drop=True)], axis=1)
+            if drop_index == True:
+                self.dataframe = pd.concat([self.dataframe.reset_index(drop=True), oh_df.reset_index(drop=True)], axis=1)
+            else:
+                self.dataframe = pd.concat([self.dataframe.reset_index(drop=False), oh_df.reset_index(drop=True)], axis=1)
         
         self.dataframe.drop(columns=col_encode, inplace=True)
         # Guardar el encoder
@@ -331,7 +334,6 @@ class Preprocesado:
         #     nuevo_dataframe[categoria] = nuevo_dataframe[categoria].map(frecuencia)
 
         return self.dataframe
-
 
 class Clustering:
     """
@@ -565,4 +567,4 @@ class Clustering:
             "silhouette_score": silhouette,
             "davies_bouldin_index": davies_bouldin,
             "cardinalidad": cardinalidad
-        }, index = [0])
+        })

@@ -1,0 +1,14 @@
+# Modelo 2
+- Se elimina Rank , federation y nationality
+- Se pasan a categoricas:
+    - gender
+    - sports
+    - hours_per_day
+    - strength
+    - agility
+    - mental
+    - federation
+- Encodeamos las categoricas
+    - "onehot" : ["gender"]
+    - "frequency" : ["sports","hours_per_day","strength","agility","mental"]
+- Estandarizamos usando Robust Scaler
