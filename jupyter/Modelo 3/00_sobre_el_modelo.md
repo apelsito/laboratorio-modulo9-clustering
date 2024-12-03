@@ -11,4 +11,4 @@
 - Encodeamos las categoricas
     - "onehot" : ["gender"]
     - "frequency" : ["sports","hours_per_day","strength","agility","mental"]
-- Estandarizamos usando Robust Scaler
+- Estandarizamos usando MinMaxScaler
